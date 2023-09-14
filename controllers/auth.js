@@ -23,7 +23,7 @@ const userAuth = async(req,res) => {
     let user = await User.findOne({where: {username: username}})
     if(user && user.password === password){
         req.session.user = username
-        res.status(400).json({ success: true })
+        res.status(200).json({ success: true })
         return
     } else {
         res.status(401).json({ success: false })
@@ -33,25 +33,35 @@ const userAuth = async(req,res) => {
 
 const logout = (req,res) => {
     req.session.destroy()
-    res.status(400).json({ success: true })
+    res.status(200).json({ success: true })
     return
 }
 
 const register = async(req,res) => {
     const { username,email,password } = req.body
     if(username && email && password){
-        let user = await User.findOne(username)
+        let user = await User.findOne({where: {username: username}})
         if(user){
             res.status(401).json({ error: 'User already exists!' })
             return
         } else {
             user = await User.create({ username,email,password })
             req.session.user = user.username
-            res.status(400).json({ success: true })
+            res.status(200).json({ success: true })
             return
         }
     } else {
         res.status(401).json({ error: 'Information missing!' })
+    }
+}
+
+const authStatus = (req,res) => {
+    if(req.session.user){
+        res.status(200).json({ user: req.session.user, loggedIn: true })
+        return
+    } else {
+        res.status(200).json({ loggedIn: false })
+        return
     }
 }
 
@@ -60,5 +70,6 @@ export {
     logoutRequired,
     userAuth,
     logout,
-    register
+    register,
+    authStatus
 }

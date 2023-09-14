@@ -9,7 +9,8 @@ import {
     logoutRequired,
     userAuth,
     logout,
-    register 
+    register,
+    authStatus 
 } from './controllers/auth.js'
 dotenv.config()
 
@@ -24,8 +25,10 @@ app.use(session({ secret: SESSION, saveUninitialized: true, resave: false }));
 
 ViteExpress.config( { printViteDevServerHost: true } )
 
-app.post('/dex/auth',logoutRequired,userAuth)
+// AUTH & REGISTRY
 app.get('/dex/logout',loginRequired,logout)
+app.get('/dex/auth/status',authStatus)
+app.post('/dex/auth',logoutRequired,userAuth)
 app.post('/dex/register',logoutRequired,register)
 
 ViteExpress.listen(app,PORT,() => console.log(`Server running on http://localhost:${PORT}`))
