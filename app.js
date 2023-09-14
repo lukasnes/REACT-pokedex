@@ -26,6 +26,6 @@ ViteExpress.config( { printViteDevServerHost: true } )
 
 app.post('/dex/auth',logoutRequired,userAuth)
 app.get('/dex/logout',loginRequired,logout)
-app.post('/dex/register',logoutRequired, )
+app.post('/dex/register',logoutRequired,register)
 
 ViteExpress.listen(app,PORT,() => console.log(`Server running on http://localhost:${PORT}`))
