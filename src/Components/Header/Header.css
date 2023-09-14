@@ -1,0 +1,13 @@
+#site-header {
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#site-header img {
+    width: auto;
+    height:max-content;
+}
