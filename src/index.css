@@ -1,0 +1,56 @@
+:root {
+    /* ---------------Colors---------------- */
+    --white: #FFFFFF;
+    --gray: #7d7d7d;
+    --black: #001A23;
+    --violet: #7B6085;
+    --blue: #306BAC;
+    --aquamarine: #7AE7C7;
+    --green: #0CCE6B;
+    --yellow: #F8C630;
+    --orange: #EF8218;
+    --red: #A32235;
+}
+
+.grass{
+    color: var(--green)
+}
+.poison{
+    color: var(--violet)
+}
+.bug{
+    color: var(--yellow)
+}
+.water{
+    color: var(--blue)
+}
+.normal{
+    color: var(--gray)
+}
+.flying{
+    color: var(--gray)
+}
+.fighting{
+    color: var(--red)
+}
+.rock{
+    color: var(--orange)
+}
+.ground{
+    color: var(--red)
+}
+.psychic{
+    color: var(--violet)
+}
+.ice{
+    color: var(--aquamarine)
+}
+.dragon{
+    color: var(--blue)
+}
+.electric{
+    color: var(--yellow)
+}
+.fire{
+    color: var(--orange)
+}

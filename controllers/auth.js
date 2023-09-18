@@ -1,4 +1,3 @@
-import session from "express-session";
 import { User } from '../database/model.js'
 
 const loginRequired = (req,res,next) => {
@@ -23,6 +22,7 @@ const userAuth = async(req,res) => {
     let user = await User.findOne({where: {username: username}})
     if(user && user.password === password){
         req.session.user = username
+        req.session.userId = user.userId
         res.status(200).json({ success: true })
         return
     } else {

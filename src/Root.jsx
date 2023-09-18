@@ -21,7 +21,7 @@ export default function Root(){
             <Header loggedIn={loggedIn}/>
 
             <main>
-                <Outlet />    
+                <Outlet context={[loggedIn]}/>    
             </main>
         </>
     )

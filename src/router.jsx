@@ -20,7 +20,8 @@ const router = createBrowserRouter(
           loader={async() => {
             const res = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=151')
             const bulbasaur = await axios.get('https://pokeapi.co/api/v2/pokemon/bulbasaur')
-            // console.log(res.data.results)
+            bulbasaur.data.pokemon = bulbasaur.data.name
+            delete bulbasaur.data.name
             return { pokemon: res.data.results,bulbasaur: bulbasaur.data }
           }}
         />

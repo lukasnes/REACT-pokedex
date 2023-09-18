@@ -3,7 +3,12 @@ import morgan from 'morgan'
 import ViteExpress from 'vite-express'
 import session from 'express-session'
 import dotenv from 'dotenv'
-import { User,Team,TeamPokemon } from './database/model.js'
+import { 
+    getTeamPokemon,
+    getIsOnTeam,
+    addToTeam, 
+    removeFromTeam
+} from './controllers/teamPokemon.js'
 import { 
     loginRequired,
     logoutRequired,
@@ -30,5 +35,11 @@ app.get('/dex/logout',loginRequired,logout)
 app.get('/dex/auth/status',authStatus)
 app.post('/dex/auth',logoutRequired,userAuth)
 app.post('/dex/register',logoutRequired,register)
+
+// TEAM POKEMON
+app.get('/dex/team-pokemon',loginRequired,getTeamPokemon)
+app.get('/dex/team-pokemon/:id',loginRequired,getIsOnTeam)
+app.post('/dex/add-to-team/:id',loginRequired,addToTeam)
+app.post('/dex/remove-from-team/:id',loginRequired,removeFromTeam)
 
 ViteExpress.listen(app,PORT,() => console.log(`Server running on http://localhost:${PORT}`))

@@ -1,0 +1,99 @@
+#poke-header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2em;
+}
+#types-list{
+    min-height: 96px;
+    min-width: 110px;
+    color: var(--white);
+    padding: 5px;
+    background-color: var(--black);
+    border: 2px solid var(--white);
+    border-radius: 10px;
+}
+
+
+#poke-container{
+    width: 70%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+    background-color: var(--gray);
+    border: 3px solid var(--black);
+    border-radius: 25px;
+    padding: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#dex-order {
+    width: 50px;
+    height: 50px;
+    background-color: var(--black);
+    color: white;
+    border: 2px solid var(--white);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#poke-info {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#poke-name {
+    min-width: 145px;
+    padding: 5px;
+    background-color: var(--black);
+    border: 2px solid var(--white);
+    border-radius: 10px;
+    text-align: center;
+}
+#poke-img {
+    width: 100px;
+    height: 100px;
+    padding: 5px;
+    background-color: var(--black);
+    border: 2px solid var(--white);
+    border-radius: 10px;
+}
+#stats-display{
+    padding: 5px;
+    min-width: 212px;
+    background-color: var(--black);
+    border: 2px solid white;
+    border-radius: 10px;
+}
+#stat-container{
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    font-size: 1.25em;
+    font-weight: 700;
+}
+.hp-stat{
+    color: var(--red);
+}
+.attack-stat{
+    color: var(--orange);
+}
+.defense-stat{
+    color: var(--yellow);
+}
+.special-attack-stat{
+    color: var(--green)
+}
+.special-defense-stat{
+    color: var(--aquamarine);
+}
+.speed-stat{
+    color: var(--blue)
+}

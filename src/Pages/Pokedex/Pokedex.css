@@ -11,35 +11,3 @@
     padding-top:10px;
     padding-bottom:10px;
 }
-
-#poke-header{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 2em;
-}
-#poke-container{
-    width: 60%;
-    height: 60%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    gap: 50px;
-    background-color: gray;
-    border: 3px solid black;
-    border-radius: 25px;
-    padding: 30px;
-}
-#dex-order {
-    width: 50px;
-    height: 50px;
-    background-color: black;
-    color: white;
-    border: 3px solid black;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
