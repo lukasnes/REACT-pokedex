@@ -20,7 +20,7 @@ export default function Root(){
         <>
             <Header loggedIn={loggedIn}/>
 
-            <main>
+            <main id='main-body'>
                 <Outlet context={[loggedIn]}/>    
             </main>
         </>

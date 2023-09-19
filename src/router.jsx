@@ -7,6 +7,7 @@ import axios from 'axios';
 import Root from './Root.jsx';
 import Pokedex from './Pages/Pokedex/Pokedex.jsx';
 import Auth from './Pages/Auth/Auth.jsx'
+import Teams from './Pages/Teams/Teams.jsx';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -28,6 +29,15 @@ const router = createBrowserRouter(
         <Route 
             path='auth'
             element={<Auth />}
+        />
+        <Route 
+          path='teams'
+          element={<Teams />}
+          loader={async() => {
+            let {data} = await axios.get('/teams/all-teams')
+            console.log(data)
+            return {teamsData: data}
+          }}
         />
       </Route>
     )

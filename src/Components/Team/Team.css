@@ -1,0 +1,27 @@
+.team-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 600px;
+    min-height: 160px;
+    background-color: var(--white);
+    border: 3px solid var(--black);
+    border-radius: 25px;
+    gap: 10px;
+}
+.team-name{
+    font-size: 1.75em;
+}
+
+.team-container{
+    display: flex;
+    align-items: center;
+}
+
+.mon-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25em;
+}

@@ -1,0 +1,16 @@
+.add-team-btn {
+    width: 95px;
+    height: 100px;
+    padding: 10px;
+    font-size: 1.10em;
+    background-color: var(--blue);
+    color: var(--white);
+    border: 2px solid var(--black);
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px var(--black);
+    cursor: pointer;
+}
+.add-team-btn:hover{
+    box-shadow: 1px 1px 3px var(--black);
+    transition: 100ms;
+}
