@@ -1,8 +1,10 @@
 import axios from 'axios'
 import './Header.css'
 import { NavLink,useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
-export default function Header({ loggedIn }){
+export default function Header(){
+    let loggedIn = useSelector((state) => state.loggedIn)
     const navigate = useNavigate()
     const handleLogout = async(evt) => {
         const {data} = await axios.get('/dex/logout')

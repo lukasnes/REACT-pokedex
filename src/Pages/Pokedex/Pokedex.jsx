@@ -1,9 +1,9 @@
 import './Pokedex.css'
 import { useLoaderData } from 'react-router-dom'
 import { useState,useEffect } from 'react'
-import { capitalize } from '../../utils/utils'
 import axios from 'axios'
 import Dex from '../../Components/Dex/Dex.jsx'
+import DexSelect from '../../Components/DexSelect/DexSelect'
 
 export default function Pokedex(){
     const { pokemon,bulbasaur } = useLoaderData()
@@ -22,19 +22,7 @@ export default function Pokedex(){
 
     return (
         <section id="dex-container">
-            <form>
-                <select 
-                    name="poke-select" 
-                    id="poke-select" 
-                    onChange={(evt) => setMonName(evt.target.value)}
-                >
-                    {pokemon.map((mon,index) => {
-                        return (
-                            <option key={index} value={mon.name}>{capitalize(mon.name)}</option>
-                        )
-                    })}
-                </select>
-            </form>
+            <DexSelect setMon={(evt) => setMonName(evt.target.value)} pokemon={pokemon}/>
             <Dex currentMon={currentMon} />
         </section>
     )

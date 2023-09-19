@@ -2,9 +2,11 @@ import axios from 'axios'
 import './Auth.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 const Auth = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [loginUser,setLoginUser] = useState("")
     const [loginPass,setLoginPass] = useState("")
 
@@ -17,6 +19,7 @@ const Auth = () => {
         evt.preventDefault()
         const {data} = await axios.post('/dex/auth', {username: loginUser, password: loginPass})
 
+        dispatch({ type: 'login' })
         setLoginUser("")
         setLoginPass("")
         if(data.success){

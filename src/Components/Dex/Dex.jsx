@@ -1,11 +1,11 @@
 import './Dex.css'
 import { capitalize } from '../../utils/utils'
-import { useOutletContext } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import AddToTeam from '../AddToTeam/AddToTeam'
 
 const Dex = ({ currentMon }) => {
     let { id,pokemon,types,imgUrl,stats } = currentMon
-    const [loggedIn] = useOutletContext()
+    let loggedIn = useSelector(state => state.loggedIn)
     let statsDisplay = stats.map(stat => {
         // console.log(stat)
         let {base_stat, stat: {name}} = stat
