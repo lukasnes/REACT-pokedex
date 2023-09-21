@@ -4,16 +4,16 @@ import './Team.css'
 
 const Team = ({team}) => {
     let { teamId,teamName,teamPokemons } = team
-    let monDisplay = teamPokemons.map(({pokemon,spriteUrl}) => {
+    let monDisplay = teamPokemons.map(({pokemon,spriteUrl},index) => {
         return (
-            <div key={pokemon} className='mon-container'>
+            <div key={index} className='mon-container'>
                 <h2>{capitalize(pokemon)}</h2>
                 <img src={spriteUrl} alt={pokemon} />
             </div>
         )
     })
     if(monDisplay.length < 6){
-        monDisplay.push(<AddToTeamButton />)
+        monDisplay.push(<AddToTeamButton teamId={teamId}/>)
     }
     return (
         <div 
@@ -21,7 +21,7 @@ const Team = ({team}) => {
             className="team-card"
         >
             <h1 className='team-name'>{teamName}</h1>
-            <div className='team-container'>
+            <div className='team-container' key={teamId}>
                 {monDisplay}
             </div>
         </div>

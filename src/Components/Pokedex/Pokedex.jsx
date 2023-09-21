@@ -1,12 +1,13 @@
 import './Pokedex.css'
-import { useLoaderData } from 'react-router-dom'
 import { useState,useEffect } from 'react'
 import axios from 'axios'
-import Dex from '../../Components/Dex/Dex.jsx'
-import DexSelect from '../../Components/DexSelect/DexSelect'
+import Dex from '../Dex/Dex.jsx'
+import DexSelect from '../DexSelect/DexSelect'
+import { useSelector } from 'react-redux'
 
 export default function Pokedex(){
-    const { pokemon,bulbasaur } = useLoaderData()
+    let pokemon = useSelector(state => state.pokemon)
+    let bulbasaur = useSelector(state => state.bulbasaur)
     const [currentMon,setCurrentMon] = useState(bulbasaur)
     const [monName,setMonName] = useState(bulbasaur.pokemon)
     // console.log(bulbasaur)

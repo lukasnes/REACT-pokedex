@@ -1,11 +1,14 @@
 import './AddToTeam.css'
 import axios from 'axios'
 import { useEffect,useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 const AddToTeam = ({ currentMon }) => {
+    const dispatch = useDispatch()
+    let teamId = useSelector(state => state.teamId)
     const [isOnTeam,setIsOnTeam] = useState(false)
     const [teamOptions,setTeamOptions] = useState([])
-    const [team,setTeam] = useState(0)
+    const [team,setTeam] = useState(teamId)
 
     const findIsOnTeam = async(id) => {
         let { data } = await axios.get(`/dex/team-pokemon/${id}`)
@@ -25,21 +28,32 @@ const AddToTeam = ({ currentMon }) => {
                     <option key={team.teamId} value={team.teamId}>{team.teamName}</option>
                 )
             })
-            setTeamOptions(options)
-            setTeam(data[0].teamId)
-            findIsOnTeam(data[0].teamId)
+            if(teamId === null){
+                setTeamOptions(options)
+                setTeam(data[0].teamId)
+                findIsOnTeam(data[0].teamId)
+            } else {
+                findIsOnTeam(teamId)
+            }
         }
         findTeamPokemon()
     },[])
 
     useEffect(() => {
-        findIsOnTeam(team)
+        if(team != null){
+            findIsOnTeam(team)
+        }
     },[currentMon,team])
 
     const addToTeam = async(evt) => {
+        console.log(teamId)
         let {data} = await axios.post(`/dex/add-to-team/${team}`,currentMon)
         if(data.success){
             setIsOnTeam(true)
+        }
+        if(teamId){
+            dispatch({ type:'modal-off' })
+            dispatch({ type:'no-team-id' }) 
         }
     }
     const removeFromTeam = async(evt) => {
@@ -51,13 +65,14 @@ const AddToTeam = ({ currentMon }) => {
 
     return (
         <div id="add-remove">
-            <select 
+            {teamId ? <></> : <select 
                 name="team-select" 
                 id="team-select"
                 onChange={(evt) => setTeam(evt.target.value)}
             >
                 {teamOptions}
-            </select>
+            </select>}
+            
             {isOnTeam ? 
             <button 
             className='recruit-button remove'

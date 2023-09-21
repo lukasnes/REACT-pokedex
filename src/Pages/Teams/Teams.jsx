@@ -2,13 +2,22 @@ import NewTeamButton from '../../Components/NewTeamButton/NewTeamButton'
 import NewTeamForm from '../../Components/NewTeamForm/NewTeamForm'
 import Team from '../../Components/Team/Team'
 import './Teams.css'
-import { useState } from 'react'
-import { useLoaderData } from 'react-router-dom'
+import axios from 'axios'
+import { useState,useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
 const Teams = () => {
-    let { teamsData } = useLoaderData()
+    const modal = useSelector(state => state.modal)
     const [isAdding,setIsAdding] = useState(false)
-    const [teams,setTeams] = useState(teamsData)
+    const [teams,setTeams] = useState([])
+
+    useEffect(() => {
+        const getTeams = async() => {
+            let {data} = await axios.get('/teams/all-teams')
+            setTeams(data)
+        }
+        getTeams()
+    },[modal])
     console.log(teams)
     let teamDisplay = teams.map(team => <Team key={team.teamId} team={team}/>)
 

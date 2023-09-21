@@ -9,7 +9,8 @@ const getTeamPokemon = async(req,res) => {
 }
 const getIsOnTeam = async(req,res) => {
     let {id} = req.params
-    let teamPokemon = await TeamPokemon.findAll({where: {teamId: +id}})
+    console.log(id)
+    let teamPokemon = await TeamPokemon.findAll({where: {teamId: parseInt(id)}})
     res.status(200).json(teamPokemon)
 }
 const addToTeam = async(req,res) => {
