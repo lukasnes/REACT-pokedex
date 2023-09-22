@@ -19,7 +19,7 @@ export default function reducer(state = initialState,action){
         case 'logout':
             return {...state, loggedIn: false};
         case 'modal-on':
-            return {...state, modal: 'block'};
+            return {...state, modal: 'flex'};
         case 'modal-off':
             return {...state, modal: 'none'};
         case 'team-id':

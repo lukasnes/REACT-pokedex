@@ -23,5 +23,13 @@ const getTeams = async(req,res) => {
     })
     res.status(200).json(teams)
 }
+const editTeam = async(req,res) => {
+    let {id} = req.params
+    let {teamName} = req.body
+    let team = await Team.findByPk(+id)
+    team.teamName = teamName
+    team.save()
+    res.status(200).json(team)
+}
 
-export { addNewTeam,getTeams }
+export { addNewTeam,getTeams,editTeam }

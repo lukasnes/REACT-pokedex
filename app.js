@@ -11,7 +11,8 @@ import {
 } from './controllers/teamPokemon.js'
 import {
     addNewTeam,
-    getTeams
+    getTeams,
+    editTeam
 } from './controllers/teams.js'
 import { 
     loginRequired,
@@ -49,5 +50,6 @@ app.post('/dex/remove-from-team/:id',loginRequired,removeFromTeam)
 // TEAMS
 app.get('/teams/all-teams',loginRequired,getTeams)
 app.post('/teams/add-new',loginRequired,addNewTeam)
+app.post('/teams/edit-team/:id',loginRequired,editTeam)
 
 ViteExpress.listen(app,PORT,() => console.log(`Server running on http://localhost:${PORT}`))

@@ -5,9 +5,13 @@ import './Teams.css'
 import axios from 'axios'
 import { useState,useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const Teams = () => {
+    const navigate = useNavigate()
     const modal = useSelector(state => state.modal)
+    const loggedIn = useSelector(state => state.loggedIn)
+    
     const [isAdding,setIsAdding] = useState(false)
     const [teams,setTeams] = useState([])
 
@@ -15,6 +19,9 @@ const Teams = () => {
         const getTeams = async() => {
             let {data} = await axios.get('/teams/all-teams')
             setTeams(data)
+        }
+        if(!loggedIn){
+            navigate('/')
         }
         getTeams()
     },[modal])

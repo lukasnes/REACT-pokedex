@@ -1,12 +1,18 @@
 import { capitalize } from '../../utils/utils'
+import { useState } from 'react'
+import axios from 'axios'
 import AddToTeamButton from '../../Components/AddToTeamButton/AddToTeamButton.jsx'
 import './Team.css'
 
 const Team = ({team}) => {
     let { teamId,teamName,teamPokemons } = team
+    const [isHovering,setIsHovering] = useState(false)
+    const [isEditing,setIsEditing] = useState(false)
+    const [nameOfTeam,setNameOfTeam] = useState(teamName)
+    const [changeName,setChangeName] = useState(teamName)
     let monDisplay = teamPokemons.map(({pokemon,spriteUrl},index) => {
         return (
-            <div key={index} className='mon-container'>
+            <div key={`${pokemon}-${teamId}`} className='mon-container'>
                 <h2>{capitalize(pokemon)}</h2>
                 <img src={spriteUrl} alt={pokemon} />
             </div>
@@ -15,14 +21,59 @@ const Team = ({team}) => {
     if(monDisplay.length < 6){
         monDisplay.push(<AddToTeamButton teamId={teamId}/>)
     }
+    const editTeam = async(evt) => {
+        const {data} = await axios.post(`/teams/edit-team/${teamId}`, { teamName: nameOfTeam })
+        console.log(data)
+        if(data){
+            setIsEditing(false)
+            setChangeName(data.teamName)
+        }
+    }
     return (
         <div 
             key={teamId} 
             className="team-card"
         >
-            <h1 className='team-name'>{teamName}</h1>
-            <div className='team-container' key={teamId}>
-                {monDisplay}
+            <img 
+                src={isHovering ? 
+                    '../../../public/img/icons/info-square-fill.svg'
+                    :
+                    '../../../public/img/icons/info-square.svg'}
+                alt="team-info" 
+                className='team-info'
+                onMouseOver={() => setIsHovering(true)}
+                onMouseOut={() => setIsHovering(false)}
+            />
+            <div className='team-pokemon'>
+                {isEditing ?
+                <header className='team-header'>
+                    <input 
+                        type="text"
+                        value={nameOfTeam}
+                        maxLength={20}
+                        onChange={(e) => setNameOfTeam(e.target.value)} 
+                    /> 
+                    <img 
+                        className="edit-icon"
+                        src="../../../public/img/icons/pencil.svg"
+                        onClick={editTeam}
+                    />
+                </header>
+                : 
+                <header 
+                    className='team-header'
+                    style={{cursor: 'pointer'}}
+                    onClick={(e) => setIsEditing(true)}
+                >
+                    <h1 className='team-name'>{changeName}</h1>
+                    <img 
+                        className="edit-icon"
+                        src="../../../public/img/icons/pencil.svg"
+                    />
+                </header>}
+                <div className='team-container' key={teamId}>
+                    {monDisplay}
+                </div>
             </div>
         </div>
     )
