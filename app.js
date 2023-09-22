@@ -14,6 +14,9 @@ import {
     getTeams,
     editTeam
 } from './controllers/teams.js'
+import {
+    getTeam
+} from './controllers/team.js'
 import { 
     loginRequired,
     logoutRequired,
@@ -51,5 +54,8 @@ app.post('/dex/remove-from-team/:id',loginRequired,removeFromTeam)
 app.get('/teams/all-teams',loginRequired,getTeams)
 app.post('/teams/add-new',loginRequired,addNewTeam)
 app.post('/teams/edit-team/:id',loginRequired,editTeam)
+
+// TEAM
+app.get('/team/:id',loginRequired,getTeam)
 
 ViteExpress.listen(app,PORT,() => console.log(`Server running on http://localhost:${PORT}`))

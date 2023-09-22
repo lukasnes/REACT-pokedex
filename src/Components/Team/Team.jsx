@@ -1,5 +1,6 @@
 import { capitalize } from '../../utils/utils'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import AddToTeamButton from '../../Components/AddToTeamButton/AddToTeamButton.jsx'
 import './Team.css'
@@ -10,6 +11,7 @@ const Team = ({team}) => {
     const [isEditing,setIsEditing] = useState(false)
     const [nameOfTeam,setNameOfTeam] = useState(teamName)
     const [changeName,setChangeName] = useState(teamName)
+    const navigate = useNavigate()
     let monDisplay = teamPokemons.map(({pokemon,spriteUrl},index) => {
         return (
             <div key={`${pokemon}-${teamId}`} className='mon-container'>
@@ -43,6 +45,7 @@ const Team = ({team}) => {
                 className='team-info'
                 onMouseOver={() => setIsHovering(true)}
                 onMouseOut={() => setIsHovering(false)}
+                onClick={() => navigate(`/team/${teamId}`)}
             />
             <div className='team-pokemon'>
                 {isEditing ?
