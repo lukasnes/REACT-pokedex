@@ -32,10 +32,10 @@ const addToTeam = async(req,res) => {
 }
 const removeFromTeam = async(req,res) => {
     let {id} = req.params
-    let { pokemon } = req.body
+    let { name } = req.body
     let monToDelete = await TeamPokemon.findOne({where: {
         teamId: +id,
-        pokemon: pokemon
+        name: pokemon
     }})
     console.log(monToDelete)
     await monToDelete.destroy()

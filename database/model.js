@@ -75,7 +75,7 @@ TeamPokemon.init(
             autoIncrement: true,
             primaryKey: true
         },
-        pokemon: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false
         },

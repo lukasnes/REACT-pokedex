@@ -8,7 +8,7 @@ const addNewTeam = async(req,res) => {
         where: {userId: req.session.userId},
         include: {
             model: TeamPokemon,
-            attributes: ['pokemon','spriteUrl']
+            attributes: ['name','spriteUrl']
         }
     })
     res.status(200).json(teams)
@@ -18,7 +18,7 @@ const getTeams = async(req,res) => {
         where: {userId: req.session.userId},
         include: {
             model: TeamPokemon,
-            attributes: ['pokemon','spriteUrl']
+            attributes: ['name','spriteUrl']
         }
     })
     res.status(200).json(teams)

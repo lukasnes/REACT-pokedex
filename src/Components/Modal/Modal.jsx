@@ -1,5 +1,6 @@
 import { useSelector,useDispatch } from 'react-redux'
 import Pokedex from '../Pokedex/Pokedex'
+import GenDex from '../GenDex/GenDex'
 import './Modal.css'
 
 const Modal = () => {
@@ -11,7 +12,7 @@ const Modal = () => {
     }
     return (
         <div style={{display:modal}} id="modal">
-            <Pokedex />
+            <GenDex />
             <button 
                 id="close-modal"
                 onClick={closeModal}

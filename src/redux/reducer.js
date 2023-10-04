@@ -1,15 +1,11 @@
 import axios from "axios";
 let {data} = await axios.get('/dex/auth/status')
-const res = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=151')
 const bulbasaur = await axios.get('https://pokeapi.co/api/v2/pokemon/bulbasaur')
-bulbasaur.data.pokemon = bulbasaur.data.name
-delete bulbasaur.data.name
 const initialState = {
     loggedIn: data.loggedIn,
     modal: 'none',
     teamId: null,
-    pokemon: res.data.results,
-    bulbasaur: bulbasaur.data
+    currentMon: bulbasaur.data
 }
 
 export default function reducer(state = initialState,action){
@@ -25,7 +21,9 @@ export default function reducer(state = initialState,action){
         case 'team-id':
             return {...state, teamId: action.payload};
         case 'no-team-id':
-            return {...state, teamId: null}
+            return {...state, teamId: null};
+        case 'set-mon':
+            return {...state, currentMon: action.payload}
         default:
             return state;
     }

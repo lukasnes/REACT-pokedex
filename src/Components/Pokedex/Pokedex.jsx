@@ -1,30 +1,56 @@
 import './Pokedex.css'
-import { useState,useEffect } from 'react'
-import axios from 'axios'
-import Dex from '../Dex/Dex.jsx'
-import DexSelect from '../DexSelect/DexSelect'
-import { useSelector } from 'react-redux'
+import { capitalize } from '../../utils/utils'
+import { useSelector,useDispatch } from 'react-redux'
+import AddToTeam from '../AddToTeam/AddToTeam'
 
-export default function Pokedex(){
-    let pokemon = useSelector(state => state.pokemon)
-    let bulbasaur = useSelector(state => state.bulbasaur)
-    const [currentMon,setCurrentMon] = useState(bulbasaur)
-    const [monName,setMonName] = useState(bulbasaur.pokemon)
-    // console.log(bulbasaur)
-    useEffect(() => {
-        const getPokemon = async(url) => {
-            const { data } = await axios.get(url)
-            let { id, name:pokemon, types, sprites: {other,front_default:spriteUrl}, stats} = data
-            let { front_default:imgUrl } = other['official-artwork']
-            setCurrentMon({ id,types,pokemon,imgUrl,spriteUrl,stats })
-        }
-        getPokemon(`https://pokeapi.co/api/v2/pokemon/${monName}`)
-    },[monName])
+const Pokedex = () => {
+    const dispatch = useDispatch()
+    let currentMon = useSelector(state => state.currentMon)
+    let { id,name,types,sprites:{other},stats } = currentMon
+    let imgUrl = other['official-artwork']['front_default']
+    let statsDisplay = stats.map(info => {
+        // console.log(stat)
+        let {base_stat, stat} = info
+        return (
+            <div id="stat-container" key={stat.name}>
+                <label className={`${stat.name}-stat`} htmlFor={`${stat.name}-stat`}>{capitalize(stat.name)}: </label>
+                <p className={`${stat.name}-stat`}>{base_stat}</p>
+            </div>
+        )
+    })
+    const openModal = (evt) => {
+        dispatch({type: 'modal-on'})
+    }
 
     return (
-        <section id="dex-container">
-            <DexSelect setMon={(evt) => setMonName(evt.target.value)} pokemon={pokemon}/>
-            <Dex currentMon={currentMon} />
-        </section>
+        <div id="poke-container" key={id}>
+            <header id="poke-header">
+                <p id="dex-order">{id}</p>
+                <h1 id="poke-name" className={types[0].type.name}>{capitalize(name)}</h1>
+                <ul id="types-list">
+                    Types:
+                    {types.map(({type},index) => {
+                        return (
+                            <li key={index} className={type.name}>
+                        {capitalize(type.name)}
+                    </li>)
+                    })}
+                </ul>
+            </header>
+            <section id="poke-info">
+                <div id="stats-display">
+                    {statsDisplay}
+                </div>
+                <img id="poke-img" src={imgUrl} />
+                {<button 
+                    id='poke-search-btn'
+                    onClick={openModal}
+                >
+                    Search for a Pokemon!
+                </button>}
+            </section>
+        </div>
     )
 }
+
+export default Pokedex
