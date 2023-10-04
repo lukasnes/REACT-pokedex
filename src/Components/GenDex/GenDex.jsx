@@ -13,9 +13,11 @@ const GenDex = () => {
         ['generation-v','V']
     ]
     const [selected,setSelected] = useState([])
-    const [genPokemon,setGenPokemon] = useState(null)
+    const [genPokemon,setGenPokemon] = useState([])
     const [gen,setGen] = useState('generation-i')
+    const [isLoading,setIsLoading] = useState(true)
     useEffect(() => {
+        setIsLoading(true)
         const findGen = async() => {
             let {data: {pokemon_species}} = await axios.get(`https://pokeapi.co/api/v2/generation/${gen}`)
             let pokemon = await Promise.all(
@@ -34,6 +36,7 @@ const GenDex = () => {
             setGenPokemon(pokemon)
         }
         findGen()
+        setIsLoading(false)
     },[gen])
 
     return (
@@ -52,7 +55,9 @@ const GenDex = () => {
                 })}
             </nav>
             <div>
-                {genPokemon ? 
+                {isLoading ? 
+                    <p>No results yet...</p>
+                 : 
                 <div id='gen-mon-container'> 
                     {genPokemon.map((pokemon,index) => {
                         if(!pokemon){
@@ -60,9 +65,7 @@ const GenDex = () => {
                         }
                         return <PokeSprite selected={selected} setSelected={setSelected} key={index} pokemon={pokemon}/>
                     })}
-                </div>
-                 : 
-                <p>No results yet...</p>}
+                </div>}
             </div>
         </section>
     )

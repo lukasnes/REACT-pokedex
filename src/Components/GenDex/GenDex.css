@@ -17,6 +17,7 @@
     top: 0px;
     width: 700px;
     min-height: 80px;
+    max-height: 80px;
     display: flex;
     justify-content: space-evenly;
     align-items: flex-start;
@@ -24,6 +25,7 @@
     background-color: var(--black);
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
+    overflow-y: visible;
 }
 .gen-tab {
     display: flex;
