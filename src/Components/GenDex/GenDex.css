@@ -26,6 +26,7 @@
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
     overflow-y: visible;
+    z-index: 5;
 }
 .gen-tab {
     display: flex;
@@ -42,7 +43,7 @@
 }
 .selected-tab {
     height: 90px;
-    transition: 1s;
+    transition: .5s;
     background-color: var(--yellow);
     color: var(--white)
 }
@@ -50,7 +51,7 @@
     border: 3px solid var(--white);
 }
 .unselected-tab{
-    transition: 1s;
+    transition: .5s;
 }
 .unselected-tab:hover {
     border: 3px solid var(--yellow);

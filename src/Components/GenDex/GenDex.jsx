@@ -17,7 +17,6 @@ const GenDex = () => {
     const [gen,setGen] = useState('generation-i')
     const [isLoading,setIsLoading] = useState(true)
     useEffect(() => {
-        setIsLoading(true)
         const findGen = async() => {
             let {data: {pokemon_species}} = await axios.get(`https://pokeapi.co/api/v2/generation/${gen}`)
             let pokemon = await Promise.all(
@@ -34,9 +33,9 @@ const GenDex = () => {
             )
             pokemon = pokemon.sort((a,b) => a.id - b.id)
             setGenPokemon(pokemon)
+            setIsLoading(false)
         }
         findGen()
-        setIsLoading(false)
     },[gen])
 
     return (
@@ -47,7 +46,10 @@ const GenDex = () => {
                         <div 
                             key={generation} 
                             className={`gen-tab ${generation === gen ? 'selected-tab' : 'unselected-tab'}`}
-                            onClick={(e) => setGen(generation)}
+                            onClick={(e) => {
+                                setGen(generation)
+                                setIsLoading(true)
+                            }}
                         >
                             {genName}
                         </div>

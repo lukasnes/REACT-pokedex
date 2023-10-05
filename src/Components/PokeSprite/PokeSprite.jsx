@@ -33,7 +33,7 @@ const PokeSprite = ({ pokemon,selected,setSelected }) => {
             onClick={changeSelected}
         >
             <h3>{capitalize(name)}</h3>
-            <img src={front_default} alt="name" />
+            <img src={front_default} alt="name" className='poke-sprite-img' />
         </div>
     )
 }

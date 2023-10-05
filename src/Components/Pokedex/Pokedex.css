@@ -1,30 +1,33 @@
-#poke-header{
-    width: 600px;
+#poke-aside{
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+#types-list{
+    min-height: 50px;
+    min-width: 300px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 2em;
-}
-#types-list{
-    min-height: 96px;
-    min-width: 110px;
     color: var(--white);
-    padding: 5px;
+    padding: 20px;
+    box-sizing: border-box;
     background-color: var(--black);
     border: 2px solid var(--white);
     border-radius: 10px;
+    font-size: 1.5em;
+    cursor: default;
 }
-
-
 #poke-container{
     width: 700px;
     height: 400px;
     display: flex;
-    flex-direction: column;
     justify-content: space-around;
     align-items: center;
     gap: 20px;
-    background-color: var(--gray);
+    background-color: var(--white);
     border: 3px solid var(--black);
     border-radius: 25px;
     padding: 30px;
@@ -38,31 +41,39 @@
     color: white;
     border: 2px solid var(--white);
     border-radius: 50%;
+    font-size: 1.5em;
+    font-weight: 500;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor:default;
 }
-
+#stats-radar {
+    background-color: var(--black);
+    border-radius: 25px;
+}
 #poke-info {
-    width: 600px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
+    gap: 20px;
 }
 #poke-name {
-    min-width: 145px;
+    min-width: 160px;
     padding: 5px;
+    font-size: 2em;
+    font-weight: 600;
     background-color: var(--black);
     border: 2px solid var(--white);
     border-radius: 10px;
     text-align: center;
+    cursor: default;
 }
 #poke-img {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     padding: 5px;
-    background-color: var(--black);
-    border: 2px solid var(--white);
+    border: 2px solid var(--black);
     border-radius: 10px;
 }
 #poke-search-btn{
@@ -79,36 +90,4 @@
 #poke-search-btn:hover{
     transition: 100ms;
     box-shadow: 2px 2px 2px var(--black);
-}
-#stats-display{
-    padding: 5px;
-    min-width: 212px;
-    background-color: var(--black);
-    border: 2px solid white;
-    border-radius: 10px;
-}
-#stat-container{
-    display: flex;
-    justify-content: space-between;
-    gap: 30px;
-    font-size: 1.25em;
-    font-weight: 700;
-}
-.hp-stat{
-    color: var(--red);
-}
-.attack-stat{
-    color: var(--orange);
-}
-.defense-stat{
-    color: var(--yellow);
-}
-.special-attack-stat{
-    color: var(--green)
-}
-.special-defense-stat{
-    color: var(--aquamarine);
-}
-.speed-stat{
-    color: var(--blue)
 }

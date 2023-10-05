@@ -1,22 +1,81 @@
 :root {
     /* ---------------Colors---------------- */
-    --white: #FFFFFF;
-    --gray: #7d7d7d;
-    --black: #001A23;
-    --violet: #7B6085;
-    --blue: #306BAC;
-    --aquamarine: #7AE7C7;
-    --green: #0CCE6B;
-    --yellow: #F8C630;
-    --orange: #EF8218;
-    --red: #A32235;
+    --white: rgb(255, 255, 255);
+    --gray: rgb(125, 125, 125);
+    --black: rgb(0, 26, 35);
+    --violet: rgb(101, 8, 213);
+    --purple: rgb(155, 93, 229);
+    --pink: rgb(255, 92, 138);
+    --light-pink: rgb(249, 190, 199);
+    --navy: rgb(2, 53, 136);
+    --blue: rgb(48, 107, 172);
+    --steel: rgb(152, 193, 217);
+    --aquamarine: rgb(122, 231, 199);
+    --green: rgb(12, 206, 107);
+    --yellow: rgb(248, 198, 48);
+    --orange: rgb(239, 130, 24);
+    --red: rgb(163, 34, 53);
+    --brown: rgb(139, 94, 52);
+    --tan: rgb(231, 188, 145);
+}
+
+.grass-bg{
+    background-color: var(--green);
+}
+.poison-bg{
+    background-color: var(--purple);
+}
+.bug-bg{
+    background-color: var(--yellow);
+}
+.water-bg{
+    background-color: var(--blue);
+}
+.normal-bg{
+    background-color: var(--gray);
+}
+.flying-bg{
+    background-color: var(--white);
+}
+.fighting-bg{
+    background-color: var(--red);
+}
+.rock-bg{
+    background-color: var(--tan);
+}
+.ground-bg{
+    background-color: var(--brown);
+}
+.psychic-bg{
+    background-color: var(--pink);
+}
+.ice-bg{
+    background-color: var(--aquamarine);
+}
+.dragon-bg{
+    background-color: var(--navy);
+}
+.electric-bg{
+    background-color: var(--yellow);
+}
+.fire-bg{
+    background-color: var(--orange);
+}
+.fairy-bg{
+    background-color: var(--light-pink);
+}
+.steel-bg{
+    background-color: var(--steel);
+}
+.ghost-bg{
+    background-color: var(--violet);
 }
 
 .grass{
     color: var(--green)
 }
 .poison{
-    color: var(--violet)
+    color: var(--purple)
 }
 .bug{
     color: var(--yellow)
@@ -28,29 +87,38 @@
     color: var(--gray)
 }
 .flying{
-    color: var(--gray)
+    color: var(--white)
 }
 .fighting{
     color: var(--red)
 }
 .rock{
-    color: var(--orange)
+    color: var(--tan)
 }
 .ground{
-    color: var(--red)
+    color: var(--brown)
 }
 .psychic{
-    color: var(--violet)
+    color: var(--pink)
 }
 .ice{
     color: var(--aquamarine)
 }
 .dragon{
-    color: var(--blue)
+    color: var(--navy)
 }
 .electric{
     color: var(--yellow)
 }
 .fire{
     color: var(--orange)
+}
+.fairy{
+    color: var(--light-pink)
+}
+.steel{
+    color: var(--steel)
+}
+.ghost{
+    color: var(--violet)
 }
