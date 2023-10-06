@@ -25,6 +25,15 @@
     align-items: center;
     font-size: 1.25em;
 }
+.team-poke-sprite{
+    position: relative;
+}
+.team-card:hover .team-poke-sprite{
+    animation: bounce;
+    animation-duration: .75s;
+    animation-iteration-count: infinite;
+}
+
 .team-header{
     display: flex;
     gap: 20px;

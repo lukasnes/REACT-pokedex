@@ -5,6 +5,7 @@ const initialState = {
     loggedIn: data.loggedIn,
     modal: 'none',
     teamId: null,
+    team: null,
     currentMon: bulbasaur.data
 }
 
@@ -19,9 +20,9 @@ export default function reducer(state = initialState,action){
         case 'modal-off':
             return {...state, modal: 'none'};
         case 'team-id':
-            return {...state, teamId: action.payload};
+            return {...state, teamId: action.payload.teamId, team: action.payload.team};
         case 'no-team-id':
-            return {...state, teamId: null};
+            return {...state, teamId: null, team: null};
         case 'set-mon':
             return {...state, currentMon: action.payload}
         default:

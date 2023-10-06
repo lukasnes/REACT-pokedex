@@ -1,18 +1,21 @@
 import { useDispatch } from 'react-redux'
 import './AddToTeamButton.css'
 
-const AddToTeamButton = ( {teamId} ) => {
+const AddToTeamButton = ( {teamId,team} ) => {
     const dispatch = useDispatch()
     const openModal = (evt) => {
-        console.log(teamId)
-        dispatch({ type:'team-id', payload: teamId })
+        // console.log(teamId,team)
+        dispatch({ type:'team-id', payload: {
+            teamId,
+            team
+        } })
         dispatch({ type:'modal-on' })
     }
     return (
         <button 
             className='add-team-btn'
             onClick={openModal}
-        >Add New Pokemon</button>
+        >+</button>
     )
 }
 

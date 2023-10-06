@@ -3,11 +3,10 @@ import { useState,useEffect } from 'react'
 import './PokeSprite.css'
 import { useSelector,useDispatch } from 'react-redux'
 
-const PokeSprite = ({ pokemon,selected,setSelected }) => {
-    console.log(pokemon)
+const PokeSprite = ({ pokemon,selected,setSelected,isFull }) => {
     const dispatch = useDispatch()
-    let { name, sprites: {front_default} } = pokemon
-    const [isSelected,setIsSelected] = useState(false)
+    let { name, sprites: {front_default}, onTeam } = pokemon
+    const [isSelected,setIsSelected] = useState(onTeam)
     const teamId = useSelector(state => state.teamId)
     const changeSelected = (evt) => {
         if(!teamId){
@@ -15,7 +14,7 @@ const PokeSprite = ({ pokemon,selected,setSelected }) => {
             dispatch({type: 'set-mon', payload: pokemon})
             return
         }
-
+        
         if(isSelected){
             setIsSelected(false)
             let newArray = [...selected]
@@ -23,8 +22,10 @@ const PokeSprite = ({ pokemon,selected,setSelected }) => {
             newArray.splice(index,1)
             setSelected(newArray)
         } else {
-            setIsSelected(true)
-            setSelected([...selected,pokemon])
+            if(!isFull){
+                setIsSelected(true)
+                setSelected([...selected,pokemon])
+            }
         }
     }
     return (

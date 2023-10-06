@@ -1,5 +1,5 @@
 #gen-dex {
-        height: 400px;
+        height: 600px;
         width: 800px;
         background-color: white;
         border: 5px solid black;
@@ -8,7 +8,6 @@
         flex-direction: column;
         gap: 50px;
         align-items: center;
-        padding-bottom:10px;
         overflow-y: scroll;
         z-index: 5;
 }
@@ -62,4 +61,34 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;    
+}
+#team-builder-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    position: sticky;
+    bottom: -5px;
+    width: 700px;
+    min-height: 75px;
+    background-color: var(--black);
+    border: 3px solid var(--black);
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+}
+#team-builder-message{
+    font-size: 1.25em;
+    color: var(--white);
+}
+#add-to-team-btn{
+    height: 30px;
+    background-color: var(--blue);
+    color: var(--white);
+    border: 2px solid var(--white);
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px var(--gray);
+    cursor: pointer;
+}
+#add-to-team-btn:hover{
+    box-shadow: 1px 1px 1px var(--gray);
 }

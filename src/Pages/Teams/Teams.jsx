@@ -25,7 +25,6 @@ const Teams = () => {
         }
         getTeams()
     },[modal])
-    console.log(teams)
     let teamDisplay = teams.map(team => <Team key={team.teamId} team={team}/>)
 
     return (

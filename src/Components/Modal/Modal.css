@@ -11,7 +11,7 @@
 }
 #close-modal{
     position: relative;
-    top: -200px;
+    top: -300px;
     left: -25px;
     border: 2px solid var(--black);
     border-radius: 50%;

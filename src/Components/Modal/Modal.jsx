@@ -10,9 +10,9 @@ const Modal = () => {
         dispatch({type: 'modal-off'})
         dispatch({type: 'no-team-id'})
     }
-    return (
+    return  (
         <div style={{display:modal}} id="modal">
-            <GenDex />
+            {modal === 'none' ? <></> :<GenDex />}
             <button 
                 id="close-modal"
                 onClick={closeModal}

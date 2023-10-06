@@ -12,10 +12,13 @@ const GenDex = () => {
         ['generation-iv','IV'],
         ['generation-v','V']
     ]
+    const teamId = useSelector(state => state.teamId)
+    const team = useSelector(state => state.team)
     const [selected,setSelected] = useState([])
     const [genPokemon,setGenPokemon] = useState([])
     const [gen,setGen] = useState('generation-i')
     const [isLoading,setIsLoading] = useState(true)
+    const [isFull, setIsFull] = useState(false)
     useEffect(() => {
         const findGen = async() => {
             let {data: {pokemon_species}} = await axios.get(`https://pokeapi.co/api/v2/generation/${gen}`)
@@ -28,6 +31,15 @@ const GenDex = () => {
                     if(!data){
                         return
                     }
+                    if(team){
+                        for(let i = 0; i < team.length; i++){
+                            if(team[i].name === data.name){
+                                data.onTeam = true
+                            } else {
+                                data.onTeam = false
+                            }
+                        }
+                    }
                     return data
                 })
             )
@@ -36,8 +48,17 @@ const GenDex = () => {
             setIsLoading(false)
         }
         findGen()
-    },[gen])
-
+    },[gen,teamId])
+    useEffect(() => {
+        if(team){
+            if(team.length + selected.length >= 6){
+                setIsFull(true)
+            } else {
+                setIsFull(false)
+            }
+        }
+    },[selected])
+    
     return (
         <section id="gen-dex">
             <nav id='gen-selector'>
@@ -65,10 +86,25 @@ const GenDex = () => {
                         if(!pokemon){
                             return <></>
                         }
-                        return <PokeSprite selected={selected} setSelected={setSelected} key={index} pokemon={pokemon}/>
+                        return <PokeSprite 
+                            selected={selected} 
+                            setSelected={setSelected}
+                            isFull={isFull}
+                            key={index} 
+                            pokemon={pokemon}
+                        />
                     })}
                 </div>}
             </div>
+            { teamId && !isLoading ? 
+            <div id="team-builder-container">
+                {isFull ? 
+                    <p id="team-builder-message">Your team is full!</p> 
+                    : 
+                    <p id="team-builder-message">Select Pokemon to add to your Team!</p>}
+                <button id="add-to-team-btn">Add to Team</button>
+            </div> : <></>
+            }
         </section>
     )
 } 

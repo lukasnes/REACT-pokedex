@@ -12,20 +12,19 @@ const Team = ({team}) => {
     const [nameOfTeam,setNameOfTeam] = useState(teamName)
     const [changeName,setChangeName] = useState(teamName)
     const navigate = useNavigate()
-    let monDisplay = teamPokemons.map(({pokemon,spriteUrl},index) => {
+    let monDisplay = teamPokemons.map(({name,spriteUrl},index) => {
         return (
-            <div key={`${pokemon}-${teamId}`} className='mon-container'>
-                <h2>{capitalize(pokemon)}</h2>
-                <img src={spriteUrl} alt={pokemon} />
+            <div key={`${name}-${teamId}`} className='mon-container'>
+                <h2>{capitalize(name)}</h2>
+                <img className='team-poke-sprite' src={spriteUrl} alt={name} />
             </div>
         )
     })
     if(monDisplay.length < 6){
-        monDisplay.push(<AddToTeamButton teamId={teamId}/>)
+        monDisplay.push(<AddToTeamButton teamId={teamId} team={teamPokemons}/>)
     }
     const editTeam = async(evt) => {
         const {data} = await axios.post(`/teams/edit-team/${teamId}`, { teamName: nameOfTeam })
-        console.log(data)
         if(data){
             setIsEditing(false)
             setChangeName(data.teamName)
