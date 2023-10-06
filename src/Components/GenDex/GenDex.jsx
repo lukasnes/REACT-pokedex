@@ -6,19 +6,49 @@ import PokeSprite from '../PokeSprite/PokeSprite'
 
 const GenDex = () => {
     const generations = [
-        ['generation-i','I'],
-        ['generation-ii','II'],
-        ['generation-iii','III'],
-        ['generation-iv','IV'],
-        ['generation-v','V']
+        ['generation-i','I',1],
+        ['generation-ii','II',2],
+        ['generation-iii','III',3],
+        ['generation-iv','IV',4],
+        ['generation-v','V',5]
     ]
+    const dispatch = useDispatch()
     const teamId = useSelector(state => state.teamId)
     const team = useSelector(state => state.team)
-    const [selected,setSelected] = useState([])
+    const [selected,setSelected] = useState(team)
+    const [hasSelected,setHasSelected] = useState({
+        1: false,
+        2: false,
+        3: false,
+        4: false,
+        5: false
+    })
     const [genPokemon,setGenPokemon] = useState([])
     const [gen,setGen] = useState('generation-i')
+    const [genNumber,setGenNumber] = useState(1)
     const [isLoading,setIsLoading] = useState(true)
     const [isFull, setIsFull] = useState(false)
+    const sendSelected = async(e) => {
+        let newTeam = selected.map((pokemon) => {
+            let {name,imgUrl,spriteUrl,gen} = pokemon
+            if(!imgUrl || !spriteUrl || !name || !gen){
+                name = pokemon.name
+                spriteUrl = pokemon['sprites']['front_default']
+                imgUrl = pokemon['sprites']['other']['official-artwork']['front_default']
+            }
+            let monData = {
+                name,
+                spriteUrl,
+                imgUrl,
+                gen
+            }
+            return monData
+        })
+        let {data} = await axios.post(`/dex/add-to-team/${teamId}`, newTeam)
+        if(data.success){
+            dispatch({type: 'modal-off'})
+        }
+    }
     useEffect(() => {
         const findGen = async() => {
             let {data: {pokemon_species}} = await axios.get(`https://pokeapi.co/api/v2/generation/${gen}`)
@@ -32,13 +62,14 @@ const GenDex = () => {
                         return
                     }
                     if(team){
-                        for(let i = 0; i < team.length; i++){
-                            if(team[i].name === data.name){
-                                data.onTeam = true
-                            } else {
-                                data.onTeam = false
-                            }
+                        let index = selected.findIndex(mon => mon.name === data.name)
+                        if(index !== -1){
+                            data.onTeam = true
+                        } else {
+                            data.onTeam = false
                         }
+                    } else {
+                        data.onTeam = false
                     }
                     return data
                 })
@@ -51,28 +82,51 @@ const GenDex = () => {
     },[gen,teamId])
     useEffect(() => {
         if(team){
-            if(team.length + selected.length >= 6){
+            if(selected.length >= 6){
                 setIsFull(true)
             } else {
                 setIsFull(false)
             }
+            let newHasSelected = {...hasSelected}
+            for(let genNum in newHasSelected){
+                console.log(genNum)
+                if(selected.some((mon) => mon.gen === +genNum)){
+                    console.log("hit")
+                    newHasSelected[+genNum] = true
+                } else {
+                    newHasSelected[+genNum] = false
+                }
+            }
+            setHasSelected(newHasSelected)
         }
+        console.log(hasSelected)
     },[selected])
     
     return (
         <section id="gen-dex">
             <nav id='gen-selector'>
-                {generations.map(([generation,genName]) => {
+                {generations.map(([generation,genName,genNum]) => {
                     return (
                         <div 
                             key={generation} 
-                            className={`gen-tab ${generation === gen ? 'selected-tab' : 'unselected-tab'}`}
+                            className={`
+                                gen-tab 
+                                ${generation === gen ? 'selected-tab' : 'unselected-tab'} 
+                                `}
                             onClick={(e) => {
                                 setGen(generation)
+                                setGenNumber(genNum)
                                 setIsLoading(true)
                             }}
                         >
-                            {genName}
+                            <p className='gen-label'>{genName}</p>
+                            {hasSelected[genNum] ? 
+                            <img 
+                                src="../../../public/img/icons/exclamation-circle-fill.svg" 
+                                alt="exclamation mark"
+                                className="has-selected-mark" 
+                            /> 
+                            : <></>}
                         </div>
                     )
                 })}
@@ -90,6 +144,7 @@ const GenDex = () => {
                             selected={selected} 
                             setSelected={setSelected}
                             isFull={isFull}
+                            genNumber={genNumber}
                             key={index} 
                             pokemon={pokemon}
                         />
@@ -102,7 +157,10 @@ const GenDex = () => {
                     <p id="team-builder-message">Your team is full!</p> 
                     : 
                     <p id="team-builder-message">Select Pokemon to add to your Team!</p>}
-                <button id="add-to-team-btn">Add to Team</button>
+                <button 
+                    id="add-to-team-btn"
+                    onClick={sendSelected}
+                >Add to Team</button>
             </div> : <></>
             }
         </section>

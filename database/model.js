@@ -86,6 +86,10 @@ TeamPokemon.init(
         imgUrl: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        gen: {
+            type: DataTypes.INTEGER,
+            allowNull: false
         }
     },
     {

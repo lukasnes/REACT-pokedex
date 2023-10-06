@@ -15,7 +15,12 @@ const AddToTeamButton = ( {teamId,team} ) => {
         <button 
             className='add-team-btn'
             onClick={openModal}
-        >+</button>
+        >
+            <img 
+                src="../../../public/img/icons/feather.svg" 
+                alt="feather" 
+            />
+        </button>
     )
 }
 

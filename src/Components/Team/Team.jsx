@@ -20,9 +20,7 @@ const Team = ({team}) => {
             </div>
         )
     })
-    if(monDisplay.length < 6){
-        monDisplay.push(<AddToTeamButton teamId={teamId} team={teamPokemons}/>)
-    }
+    monDisplay.push(<AddToTeamButton teamId={teamId} team={teamPokemons}/>)
     const editTeam = async(evt) => {
         const {data} = await axios.post(`/teams/edit-team/${teamId}`, { teamName: nameOfTeam })
         if(data){

@@ -3,7 +3,7 @@ import { useState,useEffect } from 'react'
 import './PokeSprite.css'
 import { useSelector,useDispatch } from 'react-redux'
 
-const PokeSprite = ({ pokemon,selected,setSelected,isFull }) => {
+const PokeSprite = ({ pokemon,selected,setSelected,isFull,genNumber }) => {
     const dispatch = useDispatch()
     let { name, sprites: {front_default}, onTeam } = pokemon
     const [isSelected,setIsSelected] = useState(onTeam)
@@ -24,6 +24,7 @@ const PokeSprite = ({ pokemon,selected,setSelected,isFull }) => {
         } else {
             if(!isFull){
                 setIsSelected(true)
+                pokemon.gen = genNumber
                 setSelected([...selected,pokemon])
             }
         }

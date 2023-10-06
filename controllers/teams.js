@@ -18,7 +18,7 @@ const getTeams = async(req,res) => {
         where: {userId: req.session.userId},
         include: {
             model: TeamPokemon,
-            attributes: ['name','spriteUrl']
+            attributes: ['name','spriteUrl','imgUrl','gen']
         }
     })
     res.status(200).json(teams)

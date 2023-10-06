@@ -6,8 +6,7 @@ import dotenv from 'dotenv'
 import { 
     getTeamPokemon,
     getIsOnTeam,
-    addToTeam, 
-    removeFromTeam
+    addToTeam
 } from './controllers/teamPokemon.js'
 import {
     addNewTeam,
@@ -48,7 +47,6 @@ app.post('/dex/register',logoutRequired,register)
 app.get('/dex/team-pokemon',loginRequired,getTeamPokemon)
 app.get('/dex/team-pokemon/:id',loginRequired,getIsOnTeam)
 app.post('/dex/add-to-team/:id',loginRequired,addToTeam)
-app.post('/dex/remove-from-team/:id',loginRequired,removeFromTeam)
 
 // TEAMS
 app.get('/teams/all-teams',loginRequired,getTeams)

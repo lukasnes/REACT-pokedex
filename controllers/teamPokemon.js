@@ -15,31 +15,15 @@ const getIsOnTeam = async(req,res) => {
 }
 const addToTeam = async(req,res) => {
     let {id} = req.params
-    let pokemon = req.body
-    delete pokemon.id
-    delete pokemon.types
-    delete pokemon.status
-    let team = await TeamPokemon.findAll({where: {teamId: +id}})
-    console.log(pokemon)
-    if(team.length >= 6){
-        res.status(401).json({ error: "Too many Pokemon" })
-        return
+    let newTeam = req.body
+    await TeamPokemon.destroy({where: {teamId: +id}})
+    let team = await Team.findByPk(+id)
+    for(let i = 0; i < newTeam.length; i++){
+        let { name,spriteUrl,imgUrl,gen } = newTeam[i]
+        await team.createTeamPokemon({name, spriteUrl, imgUrl, gen})
     }
-    team = await Team.findByPk(+id)
-    await team.createTeamPokemon(pokemon)
     res.status(200).json({ success: true })
     return
 }
-const removeFromTeam = async(req,res) => {
-    let {id} = req.params
-    let { name } = req.body
-    let monToDelete = await TeamPokemon.findOne({where: {
-        teamId: +id,
-        name: pokemon
-    }})
-    console.log(monToDelete)
-    await monToDelete.destroy()
-    res.status(200).json({ success: true })
-}
 
-export {getTeamPokemon,getIsOnTeam,addToTeam,removeFromTeam}
+export {getTeamPokemon,getIsOnTeam,addToTeam,}

@@ -29,7 +29,8 @@
 }
 .gen-tab {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
     background-color: var(--gray);
     font-size: 3em;
@@ -91,4 +92,9 @@
 }
 #add-to-team-btn:hover{
     box-shadow: 1px 1px 1px var(--gray);
+}
+.selected-tab .has-selected-mark {
+    position: relative;
+    margin-top: 11px;
+    transition: margin .5s linear;
 }
