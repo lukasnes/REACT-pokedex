@@ -1,6 +1,4 @@
-import { capitalize } from '../../utils/utils'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import AddToTeamButton from '../../Components/AddToTeamButton/AddToTeamButton.jsx'
 import './Team.css'
@@ -12,10 +10,9 @@ const Team = ({team}) => {
     const [isEditing,setIsEditing] = useState(false)
     const [nameOfTeam,setNameOfTeam] = useState(teamName)
     const [changeName,setChangeName] = useState(teamName)
-    const navigate = useNavigate()
     let monDisplay = teamPokemons.map(({name,spriteUrl},index) => {
         return (
-            <MonContainer key={index} name={name} sprite={spriteUrl} />
+            <MonContainer key={index} name={name} sprite={spriteUrl} teamId={teamId} />
         )
     })
     monDisplay.push(<AddToTeamButton teamId={teamId} team={teamPokemons}/>)
@@ -30,7 +27,6 @@ const Team = ({team}) => {
         <div 
             key={teamId} 
             className="team-card"
-            onClick={() => navigate(`/team/${teamId}`)}
         >
             <div className='team-pokemon'>
                 {isEditing ?

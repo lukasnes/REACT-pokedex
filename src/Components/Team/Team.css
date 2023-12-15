@@ -11,9 +11,8 @@
     border-radius: 25px;
     gap: 10px;
 }
-.team-card:hover{
+.team-card:has(.team-container:hover){
     background-color: var(--yellow);
-    cursor: pointer;
 }
 .team-name{
     font-size: 1.75em;
@@ -23,7 +22,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 650px;
+}
+.team-container:hover {
+    cursor: pointer;
 }
 
 .mon-container{
