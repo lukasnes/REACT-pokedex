@@ -11,8 +11,12 @@
     border-radius: 10px;
     box-shadow: 3px 3px 3px var(--black);
     cursor: pointer;
+    z-index: 2;
 }
 .add-team-btn:hover{
     box-shadow: 1px 1px 3px var(--black);
     transition: 100ms;
+}
+.no-team {
+    margin-top: 33px;
 }

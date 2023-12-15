@@ -9,7 +9,7 @@
         gap: 50px;
         align-items: center;
         overflow-y: scroll;
-        z-index: 5;
+        z-index: 4;
 }
 #gen-selector {
     position: sticky;

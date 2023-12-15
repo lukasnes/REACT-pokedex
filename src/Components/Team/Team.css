@@ -1,7 +1,9 @@
 .team-card{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 5px;
     min-width: 650px;
     min-height: 160px;
     background-color: var(--white);
@@ -9,13 +11,19 @@
     border-radius: 25px;
     gap: 10px;
 }
+.team-card:hover{
+    background-color: var(--yellow);
+    cursor: pointer;
+}
 .team-name{
     font-size: 1.75em;
 }
 
 .team-container{
     display: flex;
+    justify-content: center;
     align-items: center;
+    min-width: 650px;
 }
 
 .mon-container{

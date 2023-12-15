@@ -13,7 +13,7 @@ const AddToTeamButton = ( {teamId,team} ) => {
     }
     return (
         <button 
-            className='add-team-btn'
+            className={`add-team-btn ${team.length === 0 ? 'no-team' : ''}`}
             onClick={openModal}
         >
             <img 

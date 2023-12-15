@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import AddToTeamButton from '../../Components/AddToTeamButton/AddToTeamButton.jsx'
 import './Team.css'
+import MonContainer from '../MonContainer/MonContainer.jsx'
 
 const Team = ({team}) => {
     let { teamId,teamName,teamPokemons } = team
@@ -14,10 +15,7 @@ const Team = ({team}) => {
     const navigate = useNavigate()
     let monDisplay = teamPokemons.map(({name,spriteUrl},index) => {
         return (
-            <div key={`${name}-${teamId}`} className='mon-container'>
-                <h2>{capitalize(name)}</h2>
-                <img className='team-poke-sprite' src={spriteUrl} alt={name} />
-            </div>
+            <MonContainer key={index} name={name} sprite={spriteUrl} />
         )
     })
     monDisplay.push(<AddToTeamButton teamId={teamId} team={teamPokemons}/>)
@@ -32,18 +30,8 @@ const Team = ({team}) => {
         <div 
             key={teamId} 
             className="team-card"
+            onClick={() => navigate(`/team/${teamId}`)}
         >
-            <img 
-                src={isHovering ? 
-                    '../../../public/img/icons/info-square-fill.svg'
-                    :
-                    '../../../public/img/icons/info-square.svg'}
-                alt="team-info" 
-                className='team-info'
-                onMouseOver={() => setIsHovering(true)}
-                onMouseOut={() => setIsHovering(false)}
-                onClick={() => navigate(`/team/${teamId}`)}
-            />
             <div className='team-pokemon'>
                 {isEditing ?
                 <header className='team-header'>
